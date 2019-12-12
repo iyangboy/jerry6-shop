@@ -71,7 +71,7 @@ class ProductsController extends Controller
         return view('products.show', ['product' => $product, 'favored' => $favored]);
     }
 
-    // 添加购物车
+    // 添加收藏
     public function favor(Product $product, Request $request)
     {
         $user = $request->user();
@@ -84,12 +84,20 @@ class ProductsController extends Controller
         return [];
     }
 
-    // 取消加入购物车
+    // 取消收藏
     public function disfavor(Product $product, Request $request)
     {
         $user = $request->user();
         $user->favoriteProducts()->detach($product);
 
         return [];
+    }
+
+    // 收藏列表
+    public function favorites(Request $request)
+    {
+        $products = $request->user()->favoriteProducts()->paginate(16);
+
+        return view('products.favorites', ['products' => $products]);
     }
 }
