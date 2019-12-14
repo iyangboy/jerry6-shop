@@ -39,8 +39,12 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     // 收藏列表
     Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
 
+    // 查看购物车
+    Route::get('cart', 'CartController@index')->name('cart.index');
     // 添加到购物车
     Route::post('cart', 'CartController@add')->name('cart.add');
+    // 移除购物车商品
+    Route::delete('cart/{sku}', 'CartController@remove')->name('cart.remove');
 });
 
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
