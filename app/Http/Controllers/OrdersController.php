@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\OrderRequest;
+use App\Jobs\CloseOrder;
 use App\Models\ProductSku;
 use App\Models\UserAddress;
 use App\Models\Order;
@@ -66,6 +67,9 @@ class OrdersController extends Controller
 
             return $order;
         });
+
+        // 关闭未支付订单，延迟判断是否已经支付
+        $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
 
         return $order;
     }
