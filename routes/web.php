@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 });
 // 支付宝支付-服务器端回调
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
-});
+
 // 微信支付-服务器端回调
 Route::post('payment/wechat/notify', 'PaymentController@wechatNotify')->name('payment.wechat.notify');
 
