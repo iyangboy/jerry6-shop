@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // 支付宝支付-服务器端回调
+        'payment/alipay/notify',
     ];
 }
