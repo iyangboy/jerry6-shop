@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends AdminController
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
     protected $title = '商品分类';
 
     public function edit($id, Content $content)
