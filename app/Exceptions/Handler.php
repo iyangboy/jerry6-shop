@@ -13,6 +13,8 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
+        // 优惠券-异常
+        CouponCodeUnavailableException::class,
         InvalidRequestException::class,
     ];
 
