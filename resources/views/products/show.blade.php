@@ -11,7 +11,7 @@
             <img class="cover" src="{{ $product->image_url }}" alt="">
           </div>
           <div class="col-7">
-            <div class="title">{{ $product->title }}</div>
+            <div class="title">{{ $product->long_title ?: $product->title }}</div>
             <div class="price"><label>价格</label><em>￥</em><span>{{ $product->price }}</span></div>
             <div class="sales_and_reviews">
               <div class="sold_count">累计销量 <span class="count">{{ $product->sold_count }}</span></div>
