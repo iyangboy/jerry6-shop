@@ -31,6 +31,11 @@ Auth::routes(['verify' => true]);
 
 // auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
 Route::group(['middleware' => ['auth', 'verified']], function() {
+
+    // 用户信息
+    Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+    Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
     // 用户地址
     Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
     Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
