@@ -13,6 +13,7 @@
         "encore/laravel-admin": "1.7.7",
         "endroid/qr-code": "^3.7",
         "fideloper/proxy": "^4.0",
+        "gregwar/captcha": "^1.1",
         "jxlwqq/quill": "^1.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
