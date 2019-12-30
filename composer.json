@@ -15,6 +15,7 @@
         "jxlwqq/quill": "^1.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
+        "overtrue/easy-sms": "^1.1",
         "overtrue/laravel-lang": "^3.0",
         "predis/predis": "^1.1",
         "yansongda/pay": "^2.8"

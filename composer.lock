@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a20f81c345abce690ffb5b30cb51e77",
+    "content-hash": "03cc6e9af77cc179a144d43038afc3e4",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2053,6 +2053,54 @@
                 "serialize"
             ],
             "time": "2019-10-19T18:38:51+00:00"
+        },
+        {
+            "name": "overtrue/easy-sms",
+            "version": "1.1.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/easy-sms.git",
+                "reference": "b3c16dec37354e24a9dbbb42bef83649a688fc4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/easy-sms/zipball/b3c16dec37354e24a9dbbb42bef83649a688fc4d",
+                "reference": "b3c16dec37354e24a9dbbb42bef83649a688fc4d",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.2",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.2.3",
+                "phpunit/phpunit": "^5.7 || ^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\EasySms\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "i@overtrue.me"
+                }
+            ],
+            "description": "The easiest way to send short message.",
+            "time": "2019-09-12T08:56:35+00:00"
         },
         {
             "name": "overtrue/laravel-lang",
