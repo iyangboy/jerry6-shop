@@ -17,18 +17,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
-    Route::get('version', function() {
-        abort(403, 'test');
-        return 'this is version v1';
-    })->name('version');
+Route::prefix('v1')
+    ->namespace('Api')
+    ->name('api.v1.')
+    ->middleware('throttle:1,1')
+    ->group(function() {
 
-    // 短信验证码
-    Route::post('verificationCodes', 'VerificationCodesController@store')
-        ->name('verificationCodes.store');
-    // 用户注册
-    Route::post('users', 'UsersController@store')
-        ->name('users.store');
+        Route::get('version', function() {
+            abort(403, 'test');
+            return 'this is version v1';
+        })->name('version');
+
+        Route::middleware('throttle:' . config('api.rate_limits.sign'))
+            ->group(function () {
+                // 短信验证码
+                Route::post('verificationCodes', 'VerificationCodesController@store')->name('verificationCodes.store');
+                // 用户注册
+                Route::post('users', 'UsersController@store')->name('users.store');
+        });
+        Route::middleware('throttle:' . config('api.rate_limits.access'))
+        ->group(function () {
+
+        });
 
 });
 
