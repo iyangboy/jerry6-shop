@@ -37,7 +37,10 @@ Route::prefix('v1')
     });
     Route::middleware('throttle:' . config('api.rate_limits.access'))
     ->group(function () {
-
+        // 第三方登录
+        Route::post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
+            ->where('social_type', 'weixin')
+            ->name('api.socials.authorizations.store');
     });
 
 });

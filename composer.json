@@ -20,6 +20,8 @@
         "overtrue/easy-sms": "^1.1",
         "overtrue/laravel-lang": "^3.0",
         "predis/predis": "^1.1",
+        "socialiteproviders/weixin": "^4.0",
+        "tymon/jwt-auth": "1.0.0-rc.5",
         "yansongda/pay": "^2.8"
     },
     "require-dev": {
