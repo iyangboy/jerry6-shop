@@ -15,7 +15,7 @@ class VerificationCodesController extends Controller
         $phone = $request->phone;
 
         if (!app()->environment('production')) {
-            $code = '1234';
+            $code = '123456';
         } else {
             // 生成6位随机数，左侧补0
             $code = str_pad(random_int(1, 999999), 4, 0, STR_PAD_LEFT);
