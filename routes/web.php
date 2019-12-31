@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+Route::get('test-api-category', 'Api\CategoriesController@index');
 Route::get('test-alipay', function() {
     return app('alipay')->web([
         'out_trade_no' => time(),
