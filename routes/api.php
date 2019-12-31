@@ -55,6 +55,11 @@ Route::prefix('v1')
         // 分类列表
         Route::get('categories', 'CategoriesController@index')->name('categories.index');
 
+        // 商品列表，详情
+        Route::resource('products', 'ProductsController')->only([
+            'index', 'show'
+        ]);
+
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function() {
             // 当前登录用户信息
