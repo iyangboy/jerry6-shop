@@ -36,6 +36,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/users/{user}', 'UsersController@show')->name('users.show');
     Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
     Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
+    Route::put('/users/{user}', 'UsersController@update')->name('users.update');
+
     // 用户地址
     Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
     Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
