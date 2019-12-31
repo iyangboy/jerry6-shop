@@ -68,6 +68,9 @@ Route::prefix('v1')
             Route::patch('user', 'UsersController@update')->name('user.update');
             // 上传图片
             Route::post('images', 'ImagesController@store')->name('images.store');
+
+            // 收货地址管理
+            Route::resource('user_addresses', 'UserAddressesController');
         });
     });
 
