@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class Product extends Model
 {
@@ -53,5 +54,14 @@ class Product extends Model
                 // 使用 map 方法将属性集合变为属性值集合
                 return $properties->pluck('value')->all();
             });
+    }
+
+    //
+    public function resolveRouteBinding($value)
+    {
+        return QueryBuilder::for(self::class)
+            ->allowedIncludes('category')
+            ->where($this->getRouteKeyName(), $value)
+            ->first();
     }
 }

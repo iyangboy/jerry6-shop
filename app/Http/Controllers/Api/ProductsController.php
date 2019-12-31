@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Queries\ProductQuery;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class ProductsController extends Controller
 {
 
     // 产品列表
-    public function index(Request $request, Product $product)
+    public function index(Request $request, Product $product, ProductQuery $query)
     {
         // $query = $product->query();
 
@@ -24,14 +25,31 @@ class ProductsController extends Controller
 
         // return ProductResource::collection($products);
 
-        $products = QueryBuilder::for(Product::class)
-            ->allowedIncludes('category')
-            ->allowedFilters([
-                'title',
-                AllowedFilter::exact('category_id'),
-            ])
-            ->paginate();
+        $products = $query->paginate();
+
         return ProductResource::collection($products);
 
+        // $products = QueryBuilder::for(Product::class)
+        //     ->allowedIncludes('category')
+        //     ->allowedFilters([
+        //         'title',
+        //         AllowedFilter::exact('category_id'),
+        //     ])
+        //     ->paginate();
+        // return ProductResource::collection($products);
+
+    }
+
+    // 商品详情
+    public function show($id, ProductQuery $query)
+    {
+        $product = $query->findOrFail($id);
+        return new ProductResource($product);
+
+        // $product = QueryBuilder::for(Product::class)
+        //     ->allowedIncludes('category')
+        //     ->findOrFail($id);
+
+        // return new ProductResource($product);
     }
 }
