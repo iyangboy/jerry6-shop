@@ -7,15 +7,30 @@ class UserAddressRequest extends FormRequest
 {
     public function rules()
     {
-        return [
-            'province'      => 'required',
-            'city'          => 'required',
-            'district'      => 'required',
-            'address'       => 'required',
-            'zip'           => 'nullable|numeric',
-            'contact_name'  => 'required',
-            'contact_phone' => 'required',
-        ];
+        switch($this->method()) {
+        case 'POST':
+            return [
+                'province'      => 'required',
+                'city'          => 'required',
+                'district'      => 'required',
+                'address'       => 'required',
+                'zip'           => 'nullable|numeric',
+                'contact_name'  => 'required',
+                'contact_phone' => 'required',
+            ];
+            break;
+        case 'PATCH':
+            return [
+                'province'      => 'required',
+                'city'          => 'required',
+                'district'      => 'required',
+                'address'       => 'required',
+                'zip'           => 'nullable|numeric',
+                'contact_name'  => 'required',
+                'contact_phone' => 'required',
+            ];
+            break;
+        }
     }
 
     public function attributes()
