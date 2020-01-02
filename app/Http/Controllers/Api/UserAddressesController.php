@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class UserAddressesController extends Controller
 {
+    // 地址列表
+    public function index(Request $request)
+    {
+        $user_addresses = $request->user()->addresses;
+
+        UserAddressResource::wrap('data');
+        return UserAddressResource::collection($user_addresses);
+    }
+
     // 添加地址
     public function store(UserAddressRequest $request, UserAddress $user_address)
     {
