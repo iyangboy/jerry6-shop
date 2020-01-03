@@ -13,6 +13,8 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('admin.home');
     // 用户
     $router->resource('users', UsersController::class);
+    // 用户地址
+    $router->resource('user_addresses', UserAddressesController::class);
     // 商品
     $router->get('products', 'ProductsController@index');
     $router->get('products/create', 'ProductsController@create');

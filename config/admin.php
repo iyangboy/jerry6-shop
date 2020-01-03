@@ -454,7 +454,12 @@ return [
                 'theme' => 'snow',
                 'height' => '200px',
             ]
+        ],
+        // 新增编辑器配置结束
+        // 地址联动
+        'china-distpicker' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
         ]
-    // 新增编辑器配置结束
     ],
 ];
