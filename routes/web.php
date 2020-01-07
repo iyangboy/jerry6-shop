@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('test-api-category', 'Api\CategoriesController@index');
+ini_set('max_execution_time', 0);
+Route::get('test-product-table', 'TestsController@productTable');
+// 数据采集测试
+Route::get('test-index-zyd-caiji', 'TestsController@indexZYDCaiJi');
 Route::get('test-alipay', function() {
     return app('alipay')->web([
         'out_trade_no' => time(),

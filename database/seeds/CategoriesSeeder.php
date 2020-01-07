@@ -31,7 +31,8 @@ class CategoriesSeeder extends Seeder
                         'name' => '塑壳断路器',
                         'children' => [
                             ['name' => '塑壳断路器'],
-                            ['name' => '塑壳式负荷隔离开关'],
+                            // ['name' => '塑壳式负荷隔离开关'],
+                            ['name' => '塑壳式负荷开关'],
                             ['name' => '塑壳漏电保护断路器'],
                             ['name' => '塑壳漏电模块附件'],
                         ],
