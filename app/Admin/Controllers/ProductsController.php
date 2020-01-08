@@ -30,12 +30,20 @@ class ProductsController extends AdminController
         $grid->model()->with(['category']);
 
         $grid->id('ID')->sortable();
+        $grid->column('image', '图片')->image(100, 100);
         $grid->title('商品名称');
         // Laravel-Admin 支持用符号 . 来展示关联关系的字段
         $grid->column('category.name', '类目');
+        $grid->column('brand.name', '品牌');
+        $grid->column('series.name', '系列');
+        $grid->column('model_name', '型号');
+        $grid->column('part_number', '订货号');
         $grid->on_sale('已上架')->display(function ($value) {
             return $value ? '是' : '否';
-        });
+        })->label([
+            '是' => 'success',
+            '否' => 'warning',
+        ]);
         $grid->price('价格');
         $grid->rating('评分');
         $grid->sold_count('销量');

@@ -41,6 +41,18 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // 品牌
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    // 系列
+    public function series()
+    {
+        return $this->belongsTo(Series::class);
+    }
+
     // 关联商品属性
     public function properties()
     {
