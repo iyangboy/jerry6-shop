@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Encore\Admin\Widgets\Table;
 use Illuminate\Http\Request;
 
 class CategoriesController extends AdminController
@@ -31,7 +32,7 @@ class CategoriesController extends AdminController
     {
         $grid = new Grid(new Category);
 
-        // $grid->model()->whereNotNull('paid_at')->orderBy('paid_at', 'desc');
+        $grid->model()->whereNull('parent_id');
 
         $grid->id('ID')->sortable();
         $grid->name('名称');
