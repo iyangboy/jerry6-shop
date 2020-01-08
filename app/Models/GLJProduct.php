@@ -3,20 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class Product extends Model
+class GLJProduct extends Model
 {
     protected $table = 'zyd_products';
 
-    protected $fillable = [
-        'title', 'long_title', 'description', 'image', 'on_sale',
-        'rating', 'sold_count', 'review_count', 'price'
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'on_sale' => 'boolean', // on_sale 是一个布尔类型的字段
+        'parameter_json' => 'array', // 商品参数
     ];
 
     // 与商品SKU关联
@@ -39,6 +35,18 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // 品牌
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    // 系列
+    public function series()
+    {
+        return $this->belongsTo(Series::class);
     }
 
     // 关联商品属性

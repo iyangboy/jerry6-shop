@@ -31,6 +31,8 @@ class CategoriesController extends AdminController
     {
         $grid = new Grid(new Category);
 
+        // $grid->model()->whereNotNull('paid_at')->orderBy('paid_at', 'desc');
+
         $grid->id('ID')->sortable();
         $grid->name('名称');
         $grid->level('层级');

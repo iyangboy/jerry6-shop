@@ -22,6 +22,9 @@ Route::group([
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
 
+    // 商品
+    $router->resource('glj-products', GLJProductsController::class);
+
     // 订单
     $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
     // 订单-详情
