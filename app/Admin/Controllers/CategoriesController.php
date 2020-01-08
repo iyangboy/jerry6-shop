@@ -8,12 +8,44 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Encore\Admin\Tree;
 use Encore\Admin\Widgets\Table;
 use Illuminate\Http\Request;
 
 class CategoriesController extends AdminController
 {
     protected $title = '商品分类';
+
+    public function index(Content $content)
+    {
+        return $content
+            ->title($this->title)
+            ->body($this->treeView());
+    }
+
+    protected function tree()
+    {
+        return Category::tree(function (Tree $tree) {
+
+            $tree->branch(function ($branch) {
+
+                // $src = config('admin.upload.host') . '/' . $branch['logo'] ;
+
+                // $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
+
+                return "{$branch['id']} - {$branch['name']}";
+
+            });
+        });
+    }
+
+    protected function treeView()
+    {
+        return Category::tree(function (Tree $tree) {
+            // $tree->disableCreate();
+            return $tree;
+        });
+    }
 
     public function edit($id, Content $content)
     {
@@ -90,6 +122,7 @@ class CategoriesController extends AdminController
                 return $value ? '是' :'否';
             });
             // 支持用符号 . 来展示关联关系的字段
+            // $form->select('parent_id', '父类目')->options(Category::selectOptions());
             $form->display('parent.name', '父类目');
         } else {
             // 定义一个名为『是否目录』的单选框
@@ -99,7 +132,8 @@ class CategoriesController extends AdminController
                 ->rules('required');
 
             // 定义一个名为父类目的下拉框
-            $form->select('parent_id', '父类目')->ajax('/admin/api/categories');
+            // $form->select('parent_id', '父类目')->ajax('/admin/api/categories');
+            $form->select('parent_id', '父类目')->options(Category::selectOptions());
         }
 
         return $form;

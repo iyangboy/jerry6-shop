@@ -33,6 +33,7 @@ class ProductsController extends AdminController
         // 使用 with 来预加载商品类目数据，减少 SQL 查询
         $grid->model()->with(['category']);
 
+        /*
         $grid->selector(function (Grid\Tools\Selector $selector) {
             $selector->select('brand_name', '品牌', [
                 // 1020 => '施耐德',
@@ -66,7 +67,7 @@ class ProductsController extends AdminController
                 '许继'    => '许继',
             ]);
 
-            /*$selector->select('price', '价格', ['0-199', '200-499', '500-999', '1000-1499', '1500-1999', '>2000'], function ($query, $value) {
+            $selector->select('price', '价格', ['0-199', '200-499', '500-999', '1000-1499', '1500-1999', '>2000'], function ($query, $value) {
                 $between = [
                     [0, 199],
                     [200, 499],
@@ -76,8 +77,9 @@ class ProductsController extends AdminController
                     [2000, 999999999],
                 ];
                 $query->whereBetween('price', $between[$value]);
-            });*/
+            });
         });
+        */
 
         $grid->filter(function($filter){
 
