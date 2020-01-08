@@ -18,6 +18,16 @@ class CategoriesController extends AdminController
 
     public function index(Content $content)
     {
+        // $categories = Category::whereNull('parent_id')->get();
+        // //dd($categories);
+        // $data = [
+        //     'categories' => $categories,
+        // ];
+
+        // return $content
+        //     ->title($this->title)
+        //     ->body(view('admin.categories.index'), ['categories' => $categories]);
+
         return $content
             ->title($this->title)
             ->body($this->treeView());
