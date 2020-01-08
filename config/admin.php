@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Jerry-admin',
+    'name' => 'GLJ-admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Jerry</b> admin',
+    'logo' => '<b>GLJ</b> admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>Ja</b>',
+    'logo-mini' => '<b>GLJ</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'Jerry 管理后台',
+    'title' => '工流界 管理后台',
 
     /*
     |--------------------------------------------------------------------------
@@ -454,7 +454,12 @@ return [
                 'theme' => 'snow',
                 'height' => '200px',
             ]
+        ],
+        // 新增编辑器配置结束
+        // 地址联动
+        'china-distpicker' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
         ]
-    // 新增编辑器配置结束
     ],
 ];

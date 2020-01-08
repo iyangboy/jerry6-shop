@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+ini_set('max_execution_time', 0);
+Route::get('test-product-table', 'TestsController@productTable');
+// 数据采集测试
+Route::get('test-index-zyd-caiji', 'TestsController@indexZYDCaiJi');
 Route::get('test-alipay', function() {
     return app('alipay')->web([
         'out_trade_no' => time(),
@@ -31,6 +35,13 @@ Auth::routes(['verify' => true]);
 
 // auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
 Route::group(['middleware' => ['auth', 'verified']], function() {
+
+    // 用户信息
+    Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+    Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
+    Route::put('/users/{user}', 'UsersController@update')->name('users.update');
+
     // 用户地址
     Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
     Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');

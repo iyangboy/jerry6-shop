@@ -36,9 +36,16 @@ class Category extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // 获取下级
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    // 获取所有子集
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 
     public function products()

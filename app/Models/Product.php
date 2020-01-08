@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class Product extends Model
 {
+    protected $table = 'zyd_products';
+
     protected $fillable = [
         'title', 'long_title', 'description', 'image', 'on_sale',
         'rating', 'sold_count', 'review_count', 'price'
@@ -38,6 +41,18 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // 品牌
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    // 系列
+    public function series()
+    {
+        return $this->belongsTo(Series::class);
+    }
+
     // 关联商品属性
     public function properties()
     {
@@ -53,5 +68,14 @@ class Product extends Model
                 // 使用 map 方法将属性集合变为属性值集合
                 return $properties->pluck('value')->all();
             });
+    }
+
+    //
+    public function resolveRouteBinding($value)
+    {
+        return QueryBuilder::for(self::class)
+            ->allowedIncludes('category')
+            ->where($this->getRouteKeyName(), $value)
+            ->first();
     }
 }

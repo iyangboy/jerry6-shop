@@ -13,12 +13,17 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('admin.home');
     // 用户
     $router->resource('users', UsersController::class);
+    // 用户地址
+    $router->resource('user_addresses', UserAddressesController::class);
     // 商品
     $router->get('products', 'ProductsController@index');
     $router->get('products/create', 'ProductsController@create');
     $router->post('products', 'ProductsController@store');
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
+
+    // 商品
+    $router->resource('glj-products', GLJProductsController::class);
 
     // 订单
     $router->get('orders', 'OrdersController@index')->name('admin.orders.index');

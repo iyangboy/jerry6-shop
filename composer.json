@@ -9,14 +9,22 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "doctrine/dbal": "^2.10",
         "encore/laravel-admin": "1.7.7",
         "endroid/qr-code": "^3.7",
         "fideloper/proxy": "^4.0",
+        "gregwar/captcha": "^1.1",
+        "intervention/image": "^2.5",
         "jxlwqq/quill": "^1.0",
+        "laravel-admin-ext/china-distpicker": "^1.4",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
+        "overtrue/easy-sms": "^1.1",
         "overtrue/laravel-lang": "^3.0",
         "predis/predis": "^1.1",
+        "socialiteproviders/weixin": "^4.0",
+        "spatie/laravel-query-builder": "^2.3",
+        "tymon/jwt-auth": "1.0.0-rc.5",
         "yansongda/pay": "^2.8"
     },
     "require-dev": {
@@ -25,6 +33,7 @@
         "laravel/ui": "^1.1",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
+        "overtrue/laravel-query-logger": "^1.0",
         "phpunit/phpunit": "^8.0"
     },
     "config": {
