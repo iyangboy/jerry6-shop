@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class Product extends Model
 {
-    protected $table = 'zyd_products';
+    protected $table = 'glj_products';
 
     protected $fillable = [
         'title', 'long_title', 'description', 'image', 'on_sale',
@@ -17,6 +17,7 @@ class Product extends Model
 
     protected $casts = [
         'on_sale' => 'boolean', // on_sale 是一个布尔类型的字段
+        'parameter_json' => 'array', // 商品参数
     ];
 
     // 与商品SKU关联

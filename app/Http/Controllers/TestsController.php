@@ -9,6 +9,7 @@ use App\Models\CategoryParameter;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Parameter;
+use App\Models\ProductSku;
 use App\Models\Series;
 use App\Models\ZydProduct;
 use App\Models\ZydProductNum;
@@ -16,6 +17,43 @@ use Illuminate\Http\Request;
 
 class TestsController extends Controller
 {
+    // 产品SKU 生成
+    public function productSku(Request $request)
+    {
+        ZydProduct::where('sku_id', 0)->chunk(200, function ($products) {
+            dump('--------------------');
+            foreach ($products as $key => $ls) {
+                # code...
+                //dd($ls->toArray());
+                /*$sku = ProductSku::where('product_id', $ls->id)->first();
+                if ($sku) {
+                    $sku_id = $sku->id;
+                } else {
+                    $sku = new ProductSku();
+                    $sku->product()->associate($ls->id);
+                    $sku->title = $ls->model_name;
+                    $sku->description = $ls->parameter_text;
+                    $sku->price = $ls->price;
+                    $sku->stock = 1000;
+                    $sku->save();
+                    $sku_id = $sku->id;
+                }*/
+                $sku = ProductSku::firstOrCreate(
+                    [ 'product_id' => $ls->id,],
+                    [
+                        'stock' => 1000,
+                        'title' => $ls->model_name,
+                        'description' => $ls->parameter_text,
+                        'price' => $ls->price,
+                    ]);
+                $sku_id = $sku->id;
+                $rs = ZydProduct::where('id', $ls->id)->update(['sku_id' => $sku_id]);
+                //dd($rs);
+            }
+        });
+        dd(1);
+    }
+
     public function productTable(Request $request)
     {
         ZydProduct::where('part_number', 'like', '[ZYD]%')->chunk(200, function ($products) {

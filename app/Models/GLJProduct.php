@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GLJProduct extends Model
 {
-    protected $table = 'zyd_products';
+    protected $table = 'glj_products';
 
     protected $guarded = [];
 

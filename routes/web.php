@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 */
 ini_set('max_execution_time', 0);
+Route::get('test-product-sku', 'TestsController@productSku');
 Route::get('test-product-table', 'TestsController@productTable');
 // 数据采集测试
 Route::get('test-index-zyd-caiji', 'TestsController@indexZYDCaiJi');
