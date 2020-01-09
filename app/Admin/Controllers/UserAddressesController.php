@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Post\Replicate;
 use App\Models\ChinaArea;
 use App\Models\UserAddress;
 use Encore\Admin\Controllers\AdminController;
@@ -40,6 +41,10 @@ class UserAddressesController extends AdminController
         $grid->column('last_used_at', '最后使用时间');
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
+
+        $grid->actions(function ($actions) {
+            $actions->add(new Replicate);
+        });
 
         return $grid;
     }

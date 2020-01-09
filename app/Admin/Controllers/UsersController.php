@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\User\CheckGrade;
+use App\Handlers\ImageUploadHandler;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -43,13 +45,19 @@ class UsersController extends AdminController
         // 不在页面显示 `新建` 按钮，因为我们不需要在后台新建用户
         $grid->disableCreateButton();
         // 同时在每一行也不显示 `编辑` 按钮
-        $grid->disableActions();
+        // $grid->disableActions();
 
         $grid->tools(function ($tools) {
             // 禁用批量删除按钮
             $tools->batch(function ($batch) {
                 $batch->disableDelete();
             });
+        });
+
+        // 操作
+        $grid->actions(function ($actions) {
+            // 审核用户等级
+            $actions->add(new CheckGrade);
         });
 
         return $grid;
