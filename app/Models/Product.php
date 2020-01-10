@@ -8,12 +8,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class Product extends Model
 {
-    protected $table = 'glj_products';
+    protected $table = 'products';
 
-    protected $fillable = [
-        'title', 'long_title', 'description', 'image', 'on_sale',
-        'rating', 'sold_count', 'review_count', 'price'
-    ];
+    // protected $fillable = [
+    //     'title', 'long_title', 'description', 'image', 'on_sale',
+    //     'rating', 'sold_count', 'review_count', 'price'
+    // ];
+
+    protected $guarded = [];
 
     protected $casts = [
         'on_sale' => 'boolean', // on_sale 是一个布尔类型的字段
