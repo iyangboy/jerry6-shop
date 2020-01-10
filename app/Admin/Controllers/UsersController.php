@@ -33,12 +33,14 @@ class UsersController extends AdminController
 
         // 创建一个列名为 用户名 的列，内容是用户的 name 字段。下面的 email() 和 created_at() 同理
         $grid->name('用户名');
+        $grid->phone('手机号');
+        $grid->corporate_name('公司名称');
 
-        $grid->email('邮箱');
+        // $grid->email('邮箱');
 
-        $grid->email_verified_at('已验证邮箱')->display(function ($value) {
-            return $value ? '是' : '否';
-        });
+        // $grid->email_verified_at('已验证邮箱')->display(function ($value) {
+        //     return $value ? '是' : '否';
+        // });
 
         $grid->created_at('注册时间');
 
@@ -94,11 +96,13 @@ class UsersController extends AdminController
     {
         $form = new Form(new User);
 
-        $form->text('name', __('Name'));
-        $form->email('email', __('Email'));
-        $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
-        $form->password('password', __('Password'));
-        $form->text('remember_token', __('Remember token'));
+        $form->text('name', '姓名');
+        $form->text('phone', '手机号');
+        $form->text('corporate_name', '公司名称');
+        // $form->email('email', '邮箱');
+        // $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
+        // $form->password('password', __('Password'));
+        // $form->text('remember_token', __('Remember token'));
 
         return $form;
     }
