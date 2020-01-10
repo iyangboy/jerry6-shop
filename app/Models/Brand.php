@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     //
-    protected $fillable = ['category_id', 'name'];
+    // protected $fillable = ['category_id', 'name'];
+    protected $guarded = [];
 }
