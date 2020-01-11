@@ -18,65 +18,19 @@ class CategoriesVController extends AdminController
 
     public function index(Content $content)
     {
-        $categories = Category::whereNull('parent_id')->get();
-        //dd($categories);
-        $data = [
-            'categories' => $categories,
-        ];
-
-        return $content
-            ->title($this->title)
-            ->body(view('admin.categories.index', ['categories' => $categories]));
+        // $categories = Category::whereNull('parent_id')->get();
+        // //dd($categories);
+        // $data = [
+        //     'categories' => $categories,
+        // ];
 
         // return $content
         //     ->title($this->title)
-        //     ->body($this->treeView());
-    }
-
-    // 子分类
-    public function indexCategoriesChildren($id, Content $content)
-    {
-        $parent_category = Category::with(['parent'])->find($id);
-        $categories = Category::with(['children'])->where('parent_id', $id)->get();
-        // dd($categories->toArray());
-        $data = [
-            'parent_category' => $parent_category,
-            'categories'      => $categories,
-        ];
+        //     ->body(view('admin.categories.index', ['categories' => $categories]));
 
         return $content
             ->title($this->title)
-            ->body(view('admin.categories.index_children', $data));
-    }
-
-    // 添加分类
-    public function categoriesAdd (Request $request)
-    {
-        // $parent_id = $request->parent_id ?? 0;
-        $name = $request->name ?? '';
-        $category = new Category();
-        $category->name = $name;
-        $category->save();
-        return $request->all();
-    }
-
-    // 编辑分类
-    public function categoriesEdit (Request $request)
-    {
-        $id = $request->id;
-        $name = $request->name;
-        $category = Category::find($id);
-        $category->name = $name;
-        $category->save();
-        return $category;
-    }
-
-    // 删除分类
-    public function delete (Request $request)
-    {
-        $id = $request->id;
-        $rs = Category::destroy($id);
-        return $rs;
+            ->body($this->treeView());
     }
 
     protected function tree()

@@ -18,19 +18,19 @@ class CategoriesController extends AdminController
 
     public function index(Content $content)
     {
-        // $categories = Category::whereNull('parent_id')->get();
-        // //dd($categories);
-        // $data = [
-        //     'categories' => $categories,
-        // ];
-
-        // return $content
-        //     ->title($this->title)
-        //     ->body(view('admin.categories.index', ['categories' => $categories]));
+        $categories = Category::whereNull('parent_id')->get();
+        //dd($categories);
+        $data = [
+            'categories' => $categories,
+        ];
 
         return $content
             ->title($this->title)
-            ->body($this->treeView());
+            ->body(view('admin.categories.index', ['categories' => $categories]));
+
+        // return $content
+        //     ->title($this->title)
+        //     ->body($this->treeView());
     }
 
     // 子分类
@@ -52,10 +52,13 @@ class CategoriesController extends AdminController
     // 添加分类
     public function categoriesAdd (Request $request)
     {
-        // $parent_id = $request->parent_id ?? 0;
+        $parent_id = $request->parent_id ?? 0;
         $name = $request->name ?? '';
         $category = new Category();
         $category->name = $name;
+        if ($parent_id) {
+            $category->parent_id = $parent_id;
+        }
         $category->save();
         return $request->all();
     }

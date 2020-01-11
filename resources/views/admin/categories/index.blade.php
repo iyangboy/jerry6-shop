@@ -31,7 +31,7 @@
             <td>{{$ls->is_directory}}</td>
             <td>{{$ls->path}}</td>
             <td>
-              <a href="{{ route('admin.categories_children.index', ['id' => $ls->id]) }}" class="btn btn-sm btn-default">二级分类</a>
+              <a href="{{ route('admin.categories_children.index', ['id' => $ls->id]) }}" class="btn btn-sm btn-default">子分类</a>
               <button type="button" class="btn btn-sm btn-primary btn-category-edit" data-toggle="modal" data-target="#myModalCategory"
               data-id="{{$ls->id}}"
               data-name="{{$ls->name}}">
@@ -46,8 +46,7 @@
       </tbody>
     </table>
   </div>
-  <!-- Button trigger modal -->
-
+</div>
 <!-- Modal新增 -->
 <div class="modal fade" id="myModalCategoryAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -71,7 +70,8 @@
     </div>
   </div>
 </div>
-<!-- Modal新增编辑 -->
+
+<!-- Modal编辑 -->
 <div class="modal fade" id="myModalCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -94,7 +94,6 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <script>

@@ -3,6 +3,9 @@
     <h3 class="box-title">订单流水号：{{ $order->no }}</h3>
     <div class="box-tools">
       <div class="btn-group float-right" style="margin-right: 10px">
+        <button type="button" class="btn btn-sm btn-primary btn-category-add" data-toggle="modal" data-target="#myModalCategoryAdd">
+          <i class="fa fa-plus"></i>新增
+        </button>
         <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-default"><i class="fa fa-list"></i> 列表</a>
       </div>
     </div>
