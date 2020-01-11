@@ -58,6 +58,14 @@ Route::group([
     $router->put('categories/{id}', 'CategoriesController@update');
     $router->delete('categories/{id}', 'CategoriesController@destroy');
     $router->get('api/categories', 'CategoriesController@apiIndex');
+    // 查看子分类
+    $router->get('categories_children/{id}', 'CategoriesController@indexCategoriesChildren')->name('admin.categories_children.index');
+    // 添加分类
+    $router->post('categories_add', 'CategoriesController@categoriesAdd')->name('admin.categories_add.index');
+    $router->put('categories_edit', 'CategoriesController@categoriesEdit')->name('admin.categories_edit.index');
+    $router->delete('categories_delete', 'CategoriesController@delete')->name('admin.categories.delete');
+
+    $router->resource('categories_v', CategoriesVController::class);
 
     // 品牌管理
     $router->resource('brands', BrandsController::class);

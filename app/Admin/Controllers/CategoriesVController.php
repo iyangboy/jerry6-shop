@@ -12,25 +12,25 @@ use Encore\Admin\Tree;
 use Encore\Admin\Widgets\Table;
 use Illuminate\Http\Request;
 
-class CategoriesController extends AdminController
+class CategoriesVController extends AdminController
 {
     protected $title = '商品分类';
 
     public function index(Content $content)
     {
-        // $categories = Category::whereNull('parent_id')->get();
-        // //dd($categories);
-        // $data = [
-        //     'categories' => $categories,
-        // ];
-
-        // return $content
-        //     ->title($this->title)
-        //     ->body(view('admin.categories.index', ['categories' => $categories]));
+        $categories = Category::whereNull('parent_id')->get();
+        //dd($categories);
+        $data = [
+            'categories' => $categories,
+        ];
 
         return $content
             ->title($this->title)
-            ->body($this->treeView());
+            ->body(view('admin.categories.index', ['categories' => $categories]));
+
+        // return $content
+        //     ->title($this->title)
+        //     ->body($this->treeView());
     }
 
     // 子分类
