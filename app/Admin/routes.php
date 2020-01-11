@@ -21,6 +21,8 @@ Route::group([
     $router->post('products', 'ProductsController@store');
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
+    // 获取子分类
+    $router->get('api/category_children', 'ProductsController@categoryChildren');
 
     // 商品
     $router->resource('glj-products', GLJProductsController::class);

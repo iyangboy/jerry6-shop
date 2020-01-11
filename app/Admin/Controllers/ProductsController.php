@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class ProductsController extends AdminController
 {
@@ -178,6 +179,14 @@ class ProductsController extends AdminController
         // 创建一个输入框，第一个参数 title 是模型的字段名，第二个参数是该字段描述
         $form->text('title', '商品名称')->rules('required');
 
+        // $categories = Category::where('level', 0)->get();
+        // $category_0 = [];
+        // foreach ($categories as $key => $cat) {
+        //     $category_0[$cat->id] = $cat->full_name;
+        // }
+        // $form->select('category_0', '一级分类')->options($category_0)->load('category_1', '/admin/api/category_children');
+        // $form->select('category_1', '二级分类')->load('category_2', '/admin/api/category_children');
+        // $form->select('category_2', '三级分类');
         // 添加一个类目字段，与之前类目管理类似，使用 Ajax 的方式来搜索添加
         $form->select('category_id', '类目')->options(function ($id) {
             $category = Category::find($id);
@@ -215,5 +224,16 @@ class ProductsController extends AdminController
         });
 
         return $form;
+    }
+
+    public function categoryChildren(Request $request)
+    {
+        $parent_id = $request->get('q');
+        $categories = Category::where('parent_id', $parent_id)->get();
+        $children = [];
+        foreach ($categories as $key => $ls) {
+            $children[$ls->id] = $ls->name;
+        }
+        return $children;
     }
 }
