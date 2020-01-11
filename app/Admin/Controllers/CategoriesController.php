@@ -58,6 +58,11 @@ class CategoriesController extends AdminController
         $category->name = $name;
         if ($parent_id) {
             $category->parent_id = $parent_id;
+
+            // 修改父级
+            $category = Category::find($id);
+            $category->name = $name;
+            $category->save();
         }
         $category->save();
         return $request->all();
