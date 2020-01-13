@@ -7,6 +7,7 @@ use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,19 @@ class ProductsController extends AdminController
      * @var string
      */
     protected $title = '商品';
+
+    public function index(Content $content)
+    {
+        $products = Product::with(['category', 'categoryBrand', 'series'])->paginate(20);
+        // dd($products->toArray());
+        $data = [
+            'products' => $products,
+        ];
+
+        return $content
+            ->title($this->title)
+            ->body(view('admin.products.index', $data));
+    }
 
     /**
      * Make a grid builder.

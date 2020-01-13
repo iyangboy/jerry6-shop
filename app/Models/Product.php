@@ -50,6 +50,12 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    // 品牌
+    public function categoryBrand()
+    {
+        return $this->belongsTo(CategoryBrand::class, 'brand_id', 'id');
+    }
+
     // 系列
     public function series()
     {
