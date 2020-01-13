@@ -8,6 +8,7 @@ use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -28,7 +29,7 @@ class UsersController extends Controller
         $user = User::create([
             'name' => $request->name,
             'phone' => $verifyData['phone'],
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ]);
 
         // 清除验证码缓存
