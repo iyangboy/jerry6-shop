@@ -16,13 +16,18 @@ Route::group([
     // 用户地址
     $router->resource('user_addresses', UserAddressesController::class);
     // 商品
-    $router->get('products', 'ProductsController@index');
+    $router->get('products', 'ProductsController@index')->name('admin.products.index');
+    $router->get('products/{id}', 'ProductsController@show')->name('admin.products.show');
     $router->get('products/create', 'ProductsController@create');
     $router->post('products', 'ProductsController@store');
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
     // 获取子分类
     $router->get('api/category_children', 'ProductsController@categoryChildren');
+    // 获取分类品牌
+    $router->get('api/category_brand', 'ProductsController@categoryBrand');
+    // 获取品牌系列
+    $router->get('api/brand_series', 'ProductsController@brandSeries');
 
     // 商品
     $router->resource('glj-products', GLJProductsController::class);

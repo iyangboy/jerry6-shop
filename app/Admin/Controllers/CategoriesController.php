@@ -18,7 +18,7 @@ class CategoriesController extends AdminController
 
     public function index(Content $content)
     {
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->orderBy('order', 'asc')->get();
         //dd($categories);
         $data = [
             'categories' => $categories,

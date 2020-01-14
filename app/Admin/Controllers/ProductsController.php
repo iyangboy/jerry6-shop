@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\BrandSeries;
 use App\Models\Category;
+use App\Models\CategoryBrand;
 use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -32,6 +34,34 @@ class ProductsController extends AdminController
             ->title($this->title)
             ->body(view('admin.products.index', $data));
     }
+
+    // 详情
+    public function show($id, Content $content)
+    {
+        $product = Product::find($id);
+        // dd($product->toArray());
+        $data = [
+            'product' => $product,
+        ];
+
+        return $content
+            ->title($this->title)
+            ->body(view('admin.products.show', $data));
+    }
+
+    // 编辑
+    // public function edit($id, Content $content)
+    // {
+    //     $product = Product::find($id);
+    //     // dd($product->toArray());
+    //     $data = [
+    //         'product' => $product,
+    //     ];
+
+    //     return $content
+    //         ->title($this->title)
+    //         ->body(view('admin.products.create_and_edit', $data));
+    // }
 
     /**
      * Make a grid builder.
@@ -193,14 +223,16 @@ class ProductsController extends AdminController
         // 创建一个输入框，第一个参数 title 是模型的字段名，第二个参数是该字段描述
         $form->text('title', '商品名称')->rules('required');
 
-        // $categories = Category::where('level', 0)->get();
-        // $category_0 = [];
-        // foreach ($categories as $key => $cat) {
-        //     $category_0[$cat->id] = $cat->full_name;
-        // }
-        // $form->select('category_0', '一级分类')->options($category_0)->load('category_1', '/admin/api/category_children');
-        // $form->select('category_1', '二级分类')->load('category_2', '/admin/api/category_children');
-        // $form->select('category_2', '三级分类');
+        $categories = Category::where('level', 0)->get();
+        $category_0 = [];
+        foreach ($categories as $key => $cat) {
+            $category_0[$cat->id] = $cat->full_name;
+        }
+        $form->select('category_1', '一级分类')->options($category_0)->load('category_2', url('/admin/api/category_children'));
+        $form->select('category_2', '二级分类')->options()->load('category_3', url('/admin/api/category_children'));
+        $form->select('category_3', '三级分类')->options()->load('brand_id', url('/admin/api/category_brand'));
+        $form->select('brand_id', '品牌')->options()->load('series_id', url('/admin/api/brand_series'));
+        $form->select('series_id', '系列')->options();
         // 添加一个类目字段，与之前类目管理类似，使用 Ajax 的方式来搜索添加
         $form->select('category_id', '类目')->options(function ($id) {
             $category = Category::find($id);
@@ -240,14 +272,38 @@ class ProductsController extends AdminController
         return $form;
     }
 
+    // 获取子分类
     public function categoryChildren(Request $request)
     {
         $parent_id = $request->get('q');
-        $categories = Category::where('parent_id', $parent_id)->get();
-        $children = [];
-        foreach ($categories as $key => $ls) {
-            $children[$ls->id] = $ls->name;
+        return Category::where('parent_id', $parent_id)->get(['id', \DB::raw('name as text')]);
+
+        // $categories = Category::where('parent_id', $parent_id)->get();
+        // $children = [];
+        // foreach ($categories as $key => $ls) {
+        //     $children[$ls->id] = $ls->name;
+        // }
+        // return $children;
+    }
+
+    // 分类品牌
+    public function categoryBrand(Request $request)
+    {
+        $category_id = $request->get('q');
+        return CategoryBrand::where('category_id', $category_id)->get(['id', \DB::raw('name as text')]);
+    }
+
+    // 品牌系列
+    public function brandSeries(Request $request)
+    {
+        $brand_id = $request->get('q');
+        $series = BrandSeries::with(['series'])->where('brand_id', $brand_id)->get();
+        $select = [];
+        foreach ($series as $key => $value) {
+            $select[$key]['id'] = $value->id;
+            $select[$key]['text'] = $value->series->name ?? '';
         }
-        return $children;
+        return $select;
+        //return BrandSeries::with('series')->where('brand_id', $brand_id)->get(['id', \DB::raw('series_id as text')]);
     }
 }

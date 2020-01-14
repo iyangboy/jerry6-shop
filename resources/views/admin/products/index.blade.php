@@ -51,7 +51,7 @@
             <td>{{$ls->price}}</td>
             <td>{{$ls->sold_count}}</td>
             <td>
-              <a href="{{ route('admin.categories_children.index', ['id' => $ls->id]) }}" class="btn btn-sm btn-default">子分类</a>
+              <a href="{{ route('admin.products.show', ['id' => $ls->id]) }}" class="btn btn-sm btn-default">详情</a>
               <button type="button" class="btn btn-sm btn-primary btn-category-edit" data-toggle="modal" data-target="#myModalCategory"
               data-id="{{$ls->id}}"
               data-name="{{$ls->name}}">
@@ -65,7 +65,10 @@
         @endforeach
       </tbody>
     </table>
-    <div class="float-right">{{ $products->links() }}</div>
+    <div>
+      <div class="float-left">总共 {{$products->total()}} 条</div>
+      <div class="float-right pull-right">{{ $products->links() }}</div>
+    </div>
   </div>
 </div>
 <!-- Modal新增 -->

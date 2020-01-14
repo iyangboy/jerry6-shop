@@ -12,4 +12,10 @@ class BrandSeries extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [];
+
+    // 所属系列
+    public function series()
+    {
+        return $this->belongsTo(Series::class, 'series_id', 'id');
+    }
 }
